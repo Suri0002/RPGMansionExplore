@@ -78,6 +78,7 @@ def current_loc():
     
 
 def direction():
+    ''' '''
     north_move()
     south_move()
     east_move()
