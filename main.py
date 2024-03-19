@@ -8,12 +8,13 @@
 ''' 
 '''
 ######################################################################
+# Import
+import sys
 
-mansion_map = [
-    ["living room", "office", "bedroom"],
-    ["main hall", "hallway", "hallway"],
-    ["gallery", "dining room", "kitchen"]
-]
+# Mansion map array
+mansion_map = [["living room", "office", "bedroom"],
+               ["main hall", "hallway", "hallway"],
+               ["gallery", "dining room", "kitchen"]]
 
 # Mansion rooms database
 mansion_rooms = {
@@ -31,7 +32,7 @@ mansion_rooms = {
     },
     "main hall": {
         "description": "On the left is a living room. On the right is a gallery.",
-        "options": ["north", "south"]
+        "options": ["north", "south", "east"]
     },
     "hallway": {
         "description": "There are old paintings hang on the walls",
@@ -46,7 +47,7 @@ mansion_rooms = {
     "gallery": {
         "description": "On the wall are your grandfather’s paintings, with"\
         " several family photos. Beside that, it is an empty room.",
-        "options": ["left"]
+        "options": ["north"]
     },
     "dining room": {
         "description": "Dining room has a long table in the middle. Chairs are"\
@@ -65,62 +66,69 @@ mansion_rooms = {
 
 Player = {"yloc": 1, "xloc": 0}
 
+action = ["go", "quit", "examine", "help"]
+
 # Functions
 
 
 def current_loc():
     ''' '''
-    if Player["yloc"] > 2 and Player["xloc"] > 2:
+    if 2 < Player["yloc"] < 0 or 2 < Player["xloc"] < 0:
         print("You can't move further")
     else:
         playerloc = mansion_map[Player["yloc"]][Player["xloc"]]
-        print(f"You're in {playerloc}.\n {mansion_rooms[playerloc]}")
-    
+        print(f"You're in {playerloc}.\n {mansion_rooms[playerloc]}\n")
+
 
 def direction():
+    if way.lower() == "north":
+        Player["yloc"] = Player["yloc"] - 1
+    elif way.lower() == "south":
+        Player["yloc"] = Player["yloc"] + 1
+    elif way.lower() == "east":
+        Player["xloc"] = Player["xloc"] + 1
+    elif way.lower() == "west":
+        Player["xloc"] = Player["xloc"] - 1
+    else:
+        print("Invalid direction!\n")
+        
+
+def player_location():
     ''' '''
-    north_move()
-    south_move()
-    east_move()
-    west_move()
-
-
-def north_move():
-    ''' '''
-    if move.lower() == "north":
-        Player["yloc"] = Player["yloc"]-1
-    current_loc()
-
-
-def south_move():
-    ''' '''
-    if move.lower() == "south":
-        Player["yloc"] = Player["yloc"]+1
-    current_loc()
-
-
-def east_move():
-    ''' '''
-    if move.lower() == "east":
-        Player["xloc"] = Player["xloc"]+1
-    current_loc()
-
-
-def west_move():
-    ''' '''
-    if move.lower() == "west":
-        Player["xloc"] = Player["xloc"]-1
-    current_loc()
-
-
-def player_choice():
-    ''' '''
-    global move
-    current_loc()
+    global way
     while True:
-        move = input("Which direction do you want to go? ")
-        direction()
+        current_loc()
+        way = input("Which direction do you want to go? ")
+        if way.lower() == "quit":
+            sys.exit("Thank you for playing!")
+        else:
+            direction()
 
 
-player_choice()
+def player_action():
+    ''' '''
+    while True:
+        for i in action:
+            print(i)
+        move = input("What do you want to do? ")
+        if move not in action:
+            print("Invalid action!\n")
+        if move.lower() == "quit":
+            sys.exit("Thank you for playing!")
+        if move.lower() == "go":
+            player_location()
             
+
+def instructions():
+    ''' '''
+    print("Welcome to the mansion!\n")
+    print("You can type 'quit' to exit the game at any point.\n")
+
+
+def main():
+    instructions()
+    player_action()
+
+
+# Main
+main()
