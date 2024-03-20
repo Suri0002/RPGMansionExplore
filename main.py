@@ -5,7 +5,11 @@
 # Coder: Suri Ho
 # Version: 1.0
 ######################################################################
-''' 
+''' The program allows player to choose an action at the start. If 
+they choose to go around, they will be given a description of the room
+they are currently in, and the direction options. Player then decide a 
+direction they want to travel. If player choose to quit, the program 
+will stop.
 '''
 ######################################################################
 # Import
@@ -31,11 +35,11 @@ mansion_rooms = {
         "options": ["south"]
     },
     "main hall": {
-        "description": "On the left is a living room. On the right is a gallery.",
+        "description": "There is a medium plaster sculpture in the middle.",
         "options": ["north", "south", "east"]
     },
     "hallway": {
-        "description": "There are old paintings hang on the walls",
+        "description": "There are old paintings hanging on the walls",
         "options": ["north", "east", "south", "west"]
     },
     "living room": {
@@ -64,68 +68,101 @@ mansion_rooms = {
     },
 }
 
+# Player dictionary
 Player = {"yloc": 1, "xloc": 0}
 
-action = ["go", "quit", "examine", "help"]
-
+# Valid action
+actions = ["go", "quit"]
 # Functions
 
 
 def current_loc():
-    ''' '''
-    if 2 < Player["yloc"] < 0 or 2 < Player["xloc"] < 0:
-        print("You can't move further")
-    else:
-        playerloc = mansion_map[Player["yloc"]][Player["xloc"]]
-        print(f"You're in {playerloc}.\n {mansion_rooms[playerloc]}\n")
+    ''' The function will updated on player location and print out their 
+    current room's description and direction options.
+    '''
+    global playerloc
+    # Player location will be updated based on user choice
+    playerloc = mansion_map[Player["yloc"]][Player["xloc"]]
+    # Print player location with description and direction options
+    print(f"You're in {playerloc}.")
+    print(mansion_rooms[playerloc]["description"] + "\n")
+    print("Direction option(s): ")
+    for option in mansion_rooms[playerloc]["options"]:
+        print(f"* {option}")
+    print("\n")
 
 
 def direction():
-    if way.lower() == "north":
-        Player["yloc"] = Player["yloc"] - 1
-    elif way.lower() == "south":
-        Player["yloc"] = Player["yloc"] + 1
-    elif way.lower() == "east":
-        Player["xloc"] = Player["xloc"] + 1
-    elif way.lower() == "west":
-        Player["xloc"] = Player["xloc"] - 1
+    ''' The function will update player's location on the row or
+    column in the map based on their direction choice. The location
+    will only be updated if the direction is in their current room's
+    options. If the chosen direction is not in their room's options,
+    an invalid message will be print and player need to choose a valid
+    option offered.
+    '''
+    if way in mansion_rooms[playerloc]["options"]:
+        if way == "north":
+            Player["yloc"] = Player["yloc"] - 1
+        elif way == "south":
+            Player["yloc"] = Player["yloc"] + 1
+        elif way == "east":
+            Player["xloc"] = Player["xloc"] + 1
+        elif way == "west":
+            Player["xloc"] = Player["xloc"] - 1
+        else:
+            # Invalid message if user type a different input
+            # than 'north', 'south', 'west', 'east'
+            print("Invalid direction!\n")
+        current_loc()
     else:
-        print("Invalid direction!\n")
-        
+        print("You can't go that way." + "\n")
+
 
 def player_location():
-    ''' '''
+    ''' The function will ask for a direction from user, then update
+    their location based on the choice. If player choose 'quit', the
+    program will stop.
+    '''
     global way
     while True:
+        # Print out current location so player know where they are at
         current_loc()
-        way = input("Which direction do you want to go? ")
-        if way.lower() == "quit":
+        way = input("Which direction do you want to go? ").lower()
+        print("\n")
+        if way == "quit":
             sys.exit("Thank you for playing!")
         else:
+            # Go to direction() function to update player location
             direction()
+            break
 
 
 def player_action():
-    ''' '''
+    ''' The function will print out actions that player can do and ask for 
+    an action input, then execute based on the choice. If player choose 
+    'quit', the program will stop.
+    '''
     while True:
-        for i in action:
-            print(i)
-        move = input("What do you want to do? ")
-        if move not in action:
+        for action in actions:
+            print(action)
+        move = input("What do you want to do? ").lower()
+        print("\n")
+        if move not in actions:
             print("Invalid action!\n")
-        if move.lower() == "quit":
+        if move == "quit":
             sys.exit("Thank you for playing!")
-        if move.lower() == "go":
+        if move == "go":
             player_location()
-            
+
 
 def instructions():
-    ''' '''
+    ''' The function will print out the instructions for player.'''
     print("Welcome to the mansion!\n")
     print("You can type 'quit' to exit the game at any point.\n")
 
 
 def main():
+    ''' The function calls other function to execute the code'''
     instructions()
     player_action()
 
