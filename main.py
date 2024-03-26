@@ -10,17 +10,17 @@ they choose to go around, they will be given a description of the room
 they are currently in, and the direction options. Player then decide a 
 direction they want to travel. If player choose to quit, the program 
 will stop.
-'''
-# CHAGESfdldkfjsdfldksf
-# again 
+''' 
 ######################################################################
 # Import
 import sys
 
 # Mansion map array
-mansion_map = [["living room", "office", "bedroom"],
-               ["main hall", "hallway", "hallway"],
-               ["gallery", "dining room", "kitchen"]]
+mansion_map = [
+    ["living room", "office", "bedroom"],
+    ["main hall", "hallway", "hallway"],
+    ["gallery", "dining room", "kitchen"]
+]
 
 # Mansion rooms database
 mansion_rooms = {
@@ -170,4 +170,4 @@ def main():
 
 
 # Main
-main()
+#main()
