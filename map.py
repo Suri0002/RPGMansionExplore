@@ -5,7 +5,8 @@
 # Coder: Suri Ho
 # Version: 2.0
 ######################################################################
-''' 
+''' This program will write a map to an external file, read the file
+and then print out the map.
 ''' 
 ######################################################################
 # Import
@@ -25,7 +26,7 @@ mapfile = 'map.txt'
 
 
 def WriteMap():
-    ''' '''
+    ''' The function will write map to an external file'''
     try:
         with open(mapfile, "w") as file:
             file.write(tabulate(mansion_map, tablefmt = "simple_grid"))
@@ -38,7 +39,7 @@ def WriteMap():
 
 
 def ReadMap():
-    ''' '''
+    ''' The function will read a file and print out the map'''
     try:
         with open(mapfile, "r") as file:
             print(file.read())
@@ -51,6 +52,9 @@ def ReadMap():
 
 
 def showMap():
+    ''' The function will call the function that writes map to an 
+    external file and function that reads and prints out the map 
+    '''
     WriteMap()
     ReadMap()
 
