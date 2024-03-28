@@ -16,9 +16,10 @@ will stop.
 import sys
 
 # Mansion map array
-mansion_map = [["living room", "office", "bedroom"],
-               ["main hall", "hallway", "hallway"],
-               ["gallery", "dining room", "kitchen"]
+mansion_map = [
+    ["living room", "office", "bedroom"],
+    ["main hall", "hallway", "hallway"],
+    ["gallery", "dining room", "kitchen"]
 ]
 
 # Mansion rooms database
