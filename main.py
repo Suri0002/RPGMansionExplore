@@ -10,7 +10,7 @@ they choose to go around, they will be given a description of the room
 they are currently in, and the direction options. Player then decide a 
 direction they want to travel. If player choose to quit, the program 
 will stop.
-''' 
+'''
 ######################################################################
 # Import
 import sys
@@ -170,4 +170,4 @@ def main():
 
 
 # Main
-#main()
+main()
