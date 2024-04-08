@@ -48,7 +48,7 @@ def ReadMap():
     else:
         print("Here is the map of this mansion!")
     finally:
-        print("Good luck")
+        print("Good luck!!")
 
 
 def showMap():

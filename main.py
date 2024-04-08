@@ -3,17 +3,16 @@
 # Class: CS 30
 # Assignment: Data Structures: RPG - Map
 # Coder: Suri Ho
-# Version: 1.0
+# Version: 2.0
 ######################################################################
-''' The program allows player to choose an action at the start. If 
-they choose to go around, they will be given a description of the room
-they are currently in, and the direction options. Player then decide a 
-direction they want to travel. If player choose to quit, the program 
-will stop.
+''' The program allow player to view map and go around the mansion.
+Player can choose to quit the game at any point.
 '''
 ######################################################################
-# Import
+# Imports
 import sys
+
+import map
 
 # Mansion map array
 mansion_map = [
@@ -74,7 +73,7 @@ mansion_rooms = {
 Player = {"yloc": 1, "xloc": 0}
 
 # Valid action
-actions = ["go", "quit"]
+actions = ["go", "quit", "map"]
 # Functions
 
 
@@ -155,11 +154,13 @@ def player_action():
             sys.exit("Thank you for playing!")
         if move == "go":
             player_location()
+        if move == "map":
+            map.showMap()
 
 
 def instructions():
     ''' The function will print out the instructions for player.'''
-    print("Welcome to the mansion!\n")
+    print("Welcome to the mansion!")
     print("You can type 'quit' to exit the game at any point.\n")
 
 
