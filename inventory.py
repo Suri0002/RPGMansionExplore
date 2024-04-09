@@ -10,7 +10,25 @@
 
 # Items database
 items = {
-    "hints": {
+    "hint1": {
+        "description": ""
+    },
+    "hint2": {
+        "description": ""
+    },
+    "hint3": {
+        "description": ""
+    },
+    "table mirror": {
+        "description": ""
+    },
+    "paintings": {
+        "description": ""
+    },
+    "family photos": {
+        "description": ""
+    },
+    "sculpture": {
         "description": ""
     }
 }
