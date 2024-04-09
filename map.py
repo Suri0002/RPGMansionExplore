@@ -35,7 +35,7 @@ def WriteMap():
     else:
         print("Mansion map has been created.")
     finally:
-        print("Good luck!")
+        print("Let's explore!")
 
 
 def ReadMap():
@@ -57,7 +57,3 @@ def showMap():
     '''
     WriteMap()
     ReadMap()
-
-
-# Main
-showMap()
