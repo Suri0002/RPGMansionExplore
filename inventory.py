@@ -8,27 +8,46 @@
 ''' '''
 ######################################################################
 
+# Mansion map array
+mansion_map = [
+    ["living room", "office", "bedroom"],
+    ["main hall", "hallway", "hallway"],
+    ["gallery", "dining room", "kitchen"]
+]
+
 # Items database
 items = {
     "hint1": {
-        "description": ""
+        "description": "You will see that in my eye",
+        "location": None
     },
     "hint2": {
-        "description": ""
+        "description": "You can enjoy this cozy place for a little"\
+        " longer, but the cold will return soon.",
+        "location": "gallery"
     },
     "hint3": {
-        "description": ""
+        "description": "",
+        "location": ""
     },
     "table mirror": {
-        "description": ""
+        "description": "",
+        "location": "living room"
     },
     "paintings": {
-        "description": ""
+        "description": "",
+        "location": "gallery"
     },
     "family photos": {
-        "description": ""
+        "description": "",
+        "location": "gallery"
     },
     "sculpture": {
-        "description": ""
+        "description": "",
+        "location": "main hall"
+    },
+    "clock": {
+        "description": "",
+        "location": "living room"
     }
 }

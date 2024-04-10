@@ -73,7 +73,7 @@ mansion_rooms = {
 Player = {"yloc": 1, "xloc": 0}
 
 # Valid action
-actions = ["go", "quit", "map"]
+actions = ["go", "quit", "map", "look"]
 # Functions
 
 
@@ -156,6 +156,8 @@ def player_action():
             player_location()
         if move == "map":
             map.showMap()
+        if move == "look":
+            pass
 
 
 def instructions():
