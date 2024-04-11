@@ -24,24 +24,27 @@ mansion_map = [
 # Mansion rooms database
 mansion_rooms = {
     "bedroom": {
-        "description": "Across the room is a door open to a balcony. On the"\
-        " right are a bed and a lamp on the bedside table. On the left is a"\
-        " wooden wardrobe.",
-        "options": ["south"]
+        "description": "Across the room, a door open to a balcony. On the"\
+        " right are a bed and a bedside table. On the left is a wooden wardrobe.",
+        "options": ["south"],
+        "look": "There is nothing suspicious about the room."
     },
     "office": {
         "description": "There are two bookcases on two sides of the walls,"\
         " filled with books and other collections. In the middle, an office"\
         " table and chair, with a large window behind.",
-        "options": ["south"]
+        "options": ["south"],
+        "look": "There is a drinking bird on the table."
     },
     "main hall": {
         "description": "There is a medium plaster sculpture in the middle.",
-        "options": ["north", "south", "east"]
+        "options": ["north", "south", "east"],
+        "look": "There is nothing suspicious about the hall."
     },
     "hallway": {
         "description": "There are old paintings hanging on the walls",
-        "options": ["north", "east", "south", "west"]
+        "options": ["north", "east", "south", "west"],
+        "look": "There is nothing suspicious about the hallway."
     },
     "living room": {
         "description": "Across the room, a large stone fireplace stands between"\
@@ -52,20 +55,23 @@ mansion_rooms = {
     "gallery": {
         "description": "On the wall are your grandfather’s paintings, with"\
         " several family photos. Beside that, it is an empty room.",
-        "options": ["north"]
+        "options": ["north"],
+        "look": ""
     },
     "dining room": {
         "description": "Dining room has a long table in the middle. Chairs are"\
         " stacked at the right corner. Across the room are two large windows,"\
         " with the white curtains open. Between them hangs an old painting. The"\
         " door on the right connects with the kitchen.",
-        "options": ["north", "east"]
+        "options": ["north", "east"],
+        "look": ""
     },
     "kitchen": {
         "description": "On the left are the oven, stove, cabinets, drawers and"\
         " sink. A big fridge on the left corner. In the middle is a long table."\
         " The door on the left connects to the dining room.",
-        "options": ["north", "west"]
+        "options": ["north", "west"],
+        "look": ""
     },
 }
 

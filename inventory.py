@@ -22,13 +22,12 @@ items = {
         "location": None
     },
     "hint2": {
-        "description": "You can enjoy this cozy place for a little"\
-        " longer, but the cold will return soon.",
+        "description": "Please take good care of my bird",
         "location": "gallery"
     },
     "hint3": {
         "description": "",
-        "location": ""
+        "location": "office"
     },
     "table mirror": {
         "description": "",
