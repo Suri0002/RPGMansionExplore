@@ -18,7 +18,8 @@ mansion_map = [
 # Items database
 items = {
     "hint1": {
-        "description": "You will see that in my eye",
+        "description": "Once there is a break, it shatters. I've tried"\
+        " my best to keep, but I can't clue the pieces together.",
         "location": None
     },
     "hint2": {
@@ -26,27 +27,13 @@ items = {
         "location": "gallery"
     },
     "hint3": {
-        "description": "",
-        "location": "office"
+        "description": "Two people walk in the night, talking about a story."\
+        " The Queen is free and leaves behind her roses. The King is trapped"\
+        " in his throne. And the Knight keeps crossing the forest but finds"\
+        " nothing.",
+        "location": "book"
     },
-    "table mirror": {
-        "description": "",
-        "location": "living room"
-    },
-    "paintings": {
-        "description": "",
-        "location": "gallery"
-    },
-    "family photos": {
-        "description": "",
-        "location": "gallery"
-    },
-    "sculpture": {
-        "description": "",
-        "location": "main hall"
-    },
-    "clock": {
-        "description": "",
-        "location": "living room"
+    "cup": {
+        "description": ""
     }
 }
