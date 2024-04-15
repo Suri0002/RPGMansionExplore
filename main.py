@@ -27,36 +27,38 @@ mansion_rooms = {
         "description": "Across the room, a door open to a balcony. On the"\
         " right are a bed and a bedside table. On the left is a wooden wardrobe.",
         "options": ["south"],
-        "look": "There is nothing suspicious about the room."
+        "look": "There is nothing suspicious in the room."
     },
     "office": {
         "description": "There are two bookcases on two sides of the walls,"\
         " filled with books and other collections. In the middle, an office"\
         " table and chair, with a large window behind.",
         "options": ["south"],
-        "look": "There is a drinking bird on the table."
+        "look": "You find a drinking bird on the table, standing next"\
+        " to an arrow pointing to the right bookcase."
     },
     "main hall": {
         "description": "There is a medium plaster sculpture in the middle.",
         "options": ["north", "south", "east"],
-        "look": "There is nothing suspicious about the hall."
+        "look": "There is nothing suspicious in the hall."
     },
     "hallway": {
         "description": "There are old paintings hanging on the walls",
         "options": ["north", "east", "south", "west"],
-        "look": "There is nothing suspicious about the hallway."
+        "look": "There is nothing suspicious in the hallway."
     },
     "living room": {
         "description": "Across the room, a large stone fireplace stands between"\
         " two big windows. On its shelf is a table mirror. In the middle are"\
         " two couches facing each other, with a long coffee table between.",
-        "options": ["south"]
+        "options": ["south"],
+        "look": ""
     },
     "gallery": {
         "description": "On the wall are your grandfather’s paintings, with"\
         " several family photos. Beside that, it is an empty room.",
         "options": ["north"],
-        "look": ""
+        "look": "There is nothing suspicious in the room."
     },
     "dining room": {
         "description": "Dining room has a long table in the middle. Chairs are"\
@@ -64,14 +66,14 @@ mansion_rooms = {
         " with the white curtains open. Between them hangs an old painting. The"\
         " door on the right connects with the kitchen.",
         "options": ["north", "east"],
-        "look": ""
+        "look": "There is nothing suspicious in the room."
     },
     "kitchen": {
         "description": "On the left are the oven, stove, cabinets, drawers and"\
         " sink. A big fridge on the left corner. In the middle is a long table."\
         " The door on the left connects to the dining room.",
         "options": ["north", "west"],
-        "look": ""
+        "look": "Someone leaves a cup on the counter."
     },
 }
 
@@ -79,13 +81,15 @@ mansion_rooms = {
 Player = {"yloc": 1, "xloc": 0}
 
 # Valid action
-actions = ["go", "quit", "map", "look"]
+actions = ["go", "quit", "map"]
+
 # Functions
 
 
 def current_loc():
     ''' The function will updated on player location and print out their 
-    current room's description and direction options.
+    current room's description and direction options, and action they
+    can do in the room.
     '''
     global playerloc
     # Player location will be updated based on user choice
@@ -96,6 +100,8 @@ def current_loc():
     print("Direction option(s): ")
     for option in mansion_rooms[playerloc]["options"]:
         print(f"* {option}")
+    for a in room_actions:
+        print(f"*{a}")
     print("\n")
 
 
@@ -163,7 +169,7 @@ def player_action():
         if move == "map":
             map.showMap()
         if move == "look":
-            pass
+            print(mansion_rooms[playerloc]["look"])
 
 
 def instructions():

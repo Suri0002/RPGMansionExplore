@@ -20,20 +20,47 @@ items = {
     "hint1": {
         "description": "Once there is a break, it shatters. I've tried"\
         " my best to keep, but I can't clue the pieces together.",
-        "location": None
+        "action": ["keep"]
     },
     "hint2": {
         "description": "Please take good care of my bird",
-        "location": "gallery"
+        "action": ["keep"]
     },
     "hint3": {
-        "description": "Two people walk in the night, talking about a story."\
+        "description": "Two people walk in the night, whispering a story."\
         " The Queen is free and leaves behind her roses. The King is trapped"\
         " in his throne. And the Knight keeps crossing the forest but finds"\
         " nothing.",
-        "location": "book"
+        "action": ["keep"]
+    },
+    "book": {
+        "description": "Looks like there's a piece of paper stuck inside.",
+        "location": "office",
+        "action": ["open"]
+    },
+    "drinking bird": {
+        "description": "Looks like you have to take care of this bird.",
+        "location": "office",
+        "action": [None]
     },
     "cup": {
-        "description": ""
+        "description": "You find a glass cup.",
+        "location": "kitchen",
+        "action": ["keep", "fill", "place"]
     }
 }
+
+inventory = []
+
+# Functions
+
+
+def viewInventory():
+    if inventory:
+        print("Inventory: ")
+        for item in inventory:
+            print(f"*{item}")
+    else:
+        print("You have nothing in your inventory.")
+
+
