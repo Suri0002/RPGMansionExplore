@@ -11,101 +11,29 @@ Player can choose to quit the game at any point.
 ######################################################################
 # Imports
 import sys
-
+import character
+import inventory
 import map
 
-# Mansion map array
-mansion_map = [
-    ["living room", "office", "bedroom"],
-    ["main hall", "hallway", "hallway"],
-    ["gallery", "dining room", "kitchen"]
-]
-
-# Mansion rooms database
-mansion_rooms = {
-    "bedroom": {
-        "description": "Across the room, a door open to a balcony. On the"\
-        " right are a bed and a bedside table. On the left is a wooden wardrobe.",
-        "options": ["south"],
-        "look": "There is nothing suspicious in the room."
-    },
-    "office": {
-        "description": "There are two bookcases on two sides of the walls,"\
-        " filled with books and other collections. In the middle, an office"\
-        " table and chair, with a large window behind.",
-        "options": ["south"],
-        "look": "You find a drinking bird on the table, standing next"\
-        " to an arrow pointing to the right bookcase."
-    },
-    "main hall": {
-        "description": "There is a medium plaster sculpture in the middle.",
-        "options": ["north", "south", "east"],
-        "look": "There is nothing suspicious in the hall."
-    },
-    "hallway": {
-        "description": "There are old paintings hanging on the walls",
-        "options": ["north", "east", "south", "west"],
-        "look": "There is nothing suspicious in the hallway."
-    },
-    "living room": {
-        "description": "Across the room, a large stone fireplace stands between"\
-        " two big windows. On its shelf is a table mirror. In the middle are"\
-        " two couches facing each other, with a long coffee table between.",
-        "options": ["south"],
-        "look": ""
-    },
-    "gallery": {
-        "description": "On the wall are your grandfather’s paintings, with"\
-        " several family photos. Beside that, it is an empty room.",
-        "options": ["north"],
-        "look": "There is nothing suspicious in the room."
-    },
-    "dining room": {
-        "description": "Dining room has a long table in the middle. Chairs are"\
-        " stacked at the right corner. Across the room are two large windows,"\
-        " with the white curtains open. Between them hangs an old painting. The"\
-        " door on the right connects with the kitchen.",
-        "options": ["north", "east"],
-        "look": "There is nothing suspicious in the room."
-    },
-    "kitchen": {
-        "description": "On the left are the oven, stove, cabinets, drawers and"\
-        " sink. A big fridge on the left corner. In the middle is a long table."\
-        " The door on the left connects to the dining room.",
-        "options": ["north", "west"],
-        "look": "Someone leaves a cup on the counter."
-    },
-}
-
-# Player dictionary
-Player = {"yloc": 1, "xloc": 0}
-
 # Valid action
-actions = ["go", "quit", "map"]
+actions = ["go", "quit", "map", "look", "view inventory", "access inventory"]
 
 # Functions
 
 
 def current_loc():
     ''' The function will updated on player location and print out their 
-    current room's description and direction options, and action they
-    can do in the room.
+    current room's description.
     '''
     global playerloc
-    # Player location will be updated based on user choice
-    playerloc = mansion_map[Player["yloc"]][Player["xloc"]]
-    # Print player location with description and direction options
+    #Player location will be updated based on user choice
+    playerloc = map.mansion_map[character.yloc][character.xloc]
+    # Print player location with description
     print(f"You're in {playerloc}.")
-    print(mansion_rooms[playerloc]["description"] + "\n")
-    print("Direction option(s): ")
-    for option in mansion_rooms[playerloc]["options"]:
-        print(f"* {option}")
-    for a in room_actions:
-        print(f"*{a}")
-    print("\n")
+    print(map.mansion_rooms[playerloc]["description"] + "\n")
 
 
-def direction():
+def movement():
     ''' The function will update player's location on the row or
     column in the map based on their direction choice. The location
     will only be updated if the direction is in their current room's
@@ -113,42 +41,44 @@ def direction():
     an invalid message will be print and player need to choose a valid
     option offered.
     '''
-    if way in mansion_rooms[playerloc]["options"]:
+    if way in map.mansion_rooms[playerloc]["options"]:
         if way == "north":
-            Player["yloc"] = Player["yloc"] - 1
+            character.yloc = character.yloc - 1
         elif way == "south":
-            Player["yloc"] = Player["yloc"] + 1
+            character.yloc = character.yloc+ 1
         elif way == "east":
-            Player["xloc"] = Player["xloc"] + 1
+            character.xloc = character.xloc + 1
         elif way == "west":
-            Player["xloc"] = Player["xloc"] - 1
+            character.xloc = character.xloc - 1
         else:
-            # Invalid message if user type a different input
-            # than 'north', 'south', 'west', 'east'
+        # Invalid message if user type a different input
+        # than 'north', 'south', 'west', 'east'
             print("Invalid direction!\n")
-        current_loc()
     else:
         print("You can't go that way." + "\n")
 
 
+
 def player_location():
-    ''' The function will ask for a direction from user, then update
+    ''' The function will ask for a direction from user, and update
     their location based on the choice. If player choose 'quit', the
     program will stop.
     '''
     global way
+    print("Direction option(s): ")
+    for option in map.mansion_rooms[playerloc]["options"]:
+        print(f"* {option}")
+    print("\n")
     while True:
-        # Print out current location so player know where they are at
-        current_loc()
         way = input("Which direction do you want to go? ").lower()
         print("\n")
         if way == "quit":
             sys.exit("Thank you for playing!")
         else:
             # Go to direction() function to update player location
-            direction()
+            movement()
             break
-
+            
 
 def player_action():
     ''' The function will print out actions that player can do and ask for 
@@ -156,6 +86,7 @@ def player_action():
     'quit', the program will stop.
     '''
     while True:
+        current_loc()
         for action in actions:
             print(action)
         move = input("What do you want to do? ").lower()
@@ -169,13 +100,20 @@ def player_action():
         if move == "map":
             map.showMap()
         if move == "look":
-            print(mansion_rooms[playerloc]["look"])
+            inventory.inspect_Room()
+        if move == "view inventory":
+            inventory.viewInventory()
+        if move == "access inventory":
+            inventory.useInventory()
 
 
 def instructions():
     ''' The function will print out the instructions for player.'''
     print("Welcome to the mansion!")
     print("You can type 'quit' to exit the game at any point.\n")
+    print("Here's your first hint. Good luck!")
+    print(inventory.hints["hint1"]["description"])
+    inventory.inventory.append("hint1")
 
 
 def main():

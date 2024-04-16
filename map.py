@@ -19,6 +19,48 @@ mansion_map = [
     ["gallery", "dining room", "kitchen"]
 ]
 
+# Mansion rooms database
+mansion_rooms = {
+    "bedroom": {
+        "description": "Across the room, a door open to a balcony. On the"\
+        " right are a bed and a bedside table. On the left is a wooden wardrobe.",
+        "options": ["south"]
+    },
+    "office": {
+        "description": "It's an organized office with a huge collection of books",
+        "options": ["south"]
+    },
+    "main hall": {
+        "description": "There is a medium plaster sculpture in the middle.",
+        "options": ["north", "south", "east"]
+    },
+    "hallway": {
+        "description": "There are old paintings hanging on the walls",
+        "options": ["north", "east", "south", "west"]
+    },
+    "living room": {
+        "description": "Across the room, a large stone fireplace stands between"\
+        " two big windows. In the middle are two couches facing each other, with a"\
+        " long coffee table in between.",
+        "options": ["south"]
+    },
+    "gallery": {
+        "description": "On the wall are your grandfather’s paintings beside some"\
+        " family photos.",
+        "options": ["north"]
+    },
+    "dining room": {
+        "description": "Dining room has a long table in the middle. Chairs are"\
+        " stacked at the right corner. Across the room are two large windows"\
+        " and an old painting hung in between.",
+        "options": ["north", "east"]
+    },
+    "kitchen": {
+        "description": "It is a clean kitchen that hasn't been used for a long time.",
+        "options": ["north", "west"]
+    },
+}
+
 # Map external file
 mapfile = 'map.txt'
 
@@ -48,7 +90,7 @@ def ReadMap():
     else:
         print("Here is the map of this mansion!")
     finally:
-        print("Good luck!!")
+        print("Good luck!!" + "\n")
 
 
 def showMap():
