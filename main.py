@@ -14,9 +14,10 @@ import sys
 import character
 import inventory
 import map
+import message
 
 # Valid action
-actions = ["go", "quit", "map", "look", "view inventory", "access inventory"]
+actions = ["go", "quit", "map", "look", "inventory"]
 
 # Functions
 
@@ -30,7 +31,7 @@ def current_loc():
     playerloc = map.mansion_map[character.yloc][character.xloc]
     # Print player location with description
     print(f"You're in {playerloc}.")
-    print(map.mansion_rooms[playerloc]["description"] + "\n")
+    print(map.mansion_rooms[playerloc]["description"])
 
 
 def movement():
@@ -68,7 +69,6 @@ def player_location():
     print("Direction option(s): ")
     for option in map.mansion_rooms[playerloc]["options"]:
         print(f"* {option}")
-    print("\n")
     while True:
         way = input("Which direction do you want to go? ").lower()
         print("\n")
@@ -88,7 +88,7 @@ def player_action():
     while True:
         current_loc()
         for action in actions:
-            print(action)
+            print(f"-{action}")
         move = input("What do you want to do? ").lower()
         print("\n")
         if move not in actions:
@@ -101,24 +101,13 @@ def player_action():
             map.showMap()
         if move == "look":
             inventory.inspect_Room()
-        if move == "view inventory":
+        if move == "inventory":
             inventory.viewInventory()
-        if move == "access inventory":
-            inventory.useInventory()
-
-
-def instructions():
-    ''' The function will print out the instructions for player.'''
-    print("Welcome to the mansion!")
-    print("You can type 'quit' to exit the game at any point.\n")
-    print("Here's your first hint. Good luck!")
-    print(inventory.hints["hint1"]["description"])
-    inventory.inventory.append("hint1")
 
 
 def main():
     ''' The function calls other function to execute the code'''
-    instructions()
+    message.instructions()
     player_action()
 
 

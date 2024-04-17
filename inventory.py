@@ -15,14 +15,10 @@ import map
 # Hints database
 hints = {
     "hint1": {
-        "description": "I treasured it the most but I can't have it. What's it?",
-        "action": ["view", "answer"]
-    },
-    "hint2": {
         "description": "Please take good care of my bird",
         "action": ["view"]
     },
-    "hint3": {
+    "hint2": {
         "description": "Two people walk in the night, whispering a story."\
         " The Queen is free and leaves behind her roses. The King is trapped"\
         " in his throne. And the Knight keeps crossing the forest but finds"\
@@ -50,7 +46,7 @@ items = {
     "cup": {
         "description": "You find a glass cup on the counter.",
         "location": "kitchen",
-        "action": ["keep", "fill", "place"],
+        "action": ["fill", "place"],
         "status": []
     },
     "clock": {
@@ -67,12 +63,21 @@ inventory = []
 
 def viewInventory():
     ''' '''
-    if inventory:
-        print("Inventory: ")
-        for item in inventory:
-            print(f"*{item}")
-    else:
-        print("You have nothing in your inventory.")
+    choosing = True
+    while choosing:
+        if inventory:
+            print("Inventory: ")
+            for item in inventory:
+                print(f"*{item}")
+            access_choice = input("Do you want to access any item? ").lower()
+            if access_choice == "yes":
+                useInventory()
+            elif access_choice == "no":
+                choosing = False
+            else:
+                print("Please choose yes or no.")
+        else:
+            print("You have nothing in your inventory.")
 
 
 def useInventory():
@@ -80,49 +85,16 @@ def useInventory():
     choosing = True
     item_choice = input("Choose an item: ").lower()
     while choosing:
-        if item_choice == "hint1":
-            for action in hints["hint1"]["action"]:
-                print(f"*{action}")
-            print("*done")
-            item_action = input("What do you want to do? ").lower()
-            if item_action == "view":
-                print(hints["hint1"]["description"])
-            elif item_action == "quit":
-                sys.exit("Thank you for playing!")
-            elif item_action == "done":
-                choosing = False
-            elif item_action == "answer":
-                answer = input("Please type your answer: ").lower()
-                if answer == "family":
-                    inventory.append("hint2")
-                    print("You've found the second hint!")
-                    print(hints["hint2"]["description"])
-                else:
-                    print("That's not the answer.")
-            else:
-                print("Invalid choice. Try again.")
-                choosing = False
-        if item_choice == "hint2" or item_choice == "hint3":
-            for action in hints["hint2"]["action"]:
-                print(f"*{action}")
-            print("*done")
-            item_action = input("What do you want to do? ").lower()
-            if item_action == "view":
-                print(hints["hint2"]["description"])
-            elif item_action == "quit":
-                sys.exit("Thank you for playing!")
-            elif item_action == "done":
-                choosing = False
-            else:
-                print("Invalid choice. Try again.")
-        if item_choice == "cup":
+        if item_choice == "hint1" or item_choice == "hint2":
+            hintAcion()
+        elif item_choice == "cup":
             #for action in items["cup"]["action"]:
                 #print(f"*{action}")
             #print("*done")
             #item_action = input("What do you want to do? ").lower()
             cupAction()
         else:
-            print("Invalid choice. Try again.")
+            print("Invalid item. Try again.")
             choosing = False
 
 
@@ -150,34 +122,55 @@ def inspect_Room():
         print("There is nothing suspicious in the room.")
 
 
+def hintAction():
+    ''' '''
+    for action in hints[item_choice]["action"]:
+        print(f"*{action}")
+    print("*done")
+    item_action = input("What do you want to do? ").lower()
+    if item_action == "view":
+        print(hints[item_choice]["description"])
+    elif item_action == "quit":
+        sys.exit("Thank you for playing!")
+    elif item_action == "done":
+        choosing = False
+    else:
+        print("Invalid choice. Try again.")
+
+
 def cupAction():
     ''' '''
     choosing = True
     while choosing:
-        for action in items["cup"]["action"]:
-            print(f"*{action}")
+        print("*keep")
         print("*done")
         cup_choice = input("Choose an action: ").lower()
         if cup_choice == "keep":
             inventory.append("cup")
             print("Cup is now in your inventory.")
-            items["cup"]["action"] = items["cup"]["action"].pop("keep")
+            for action in items["cup"]["action"]:
+                print(f"*{action}")
+            print("*done")
+            if cup_choice == "done":
+                choosing = False
+            elif cup_choice == "fill":
+                print("You've filled the cup with water")
+                items["cup"]["status"] = items["cup"]["status"].append("filled")
+            elif cup_choice == "place":
+                if location_ == "office":
+                    print("Cup is place in front of the arrow, next to the bird.")
+                    items["cup"]["status"] = items["cup"]["status"].append("placed")
+                else:
+                    print("You can't place it here!")
+            else:
+                print("Invalid choice. Try again.")
         elif cup_choice == "quit":
             sys.exit("Thank you for playing!")
         elif cup_choice == "done":
             choosing = False
-        elif cup_choice == "fill":
-            print("You've filled the cup with water")
-            items["cup"]["action"] = items["cup"]["action"].pop("fill")
-            items["cup"]["status"] = items["cup"]["status"].append("filled")
-        elif cup_choice == "place":
-            if location_ == "office":
-                print("Cup is place in front of the arrow, next to the bird.")
-                items["cup"]["status"] = items["cup"]["status"].append("placed")
-            else:
-                print("You can't place it here!")
         else:
             print("Invalid choice. Try again.")
+            choosing = False
 
 
 def birdAction():
@@ -214,6 +207,7 @@ def bookAction():
                 choosing = False
             else:
                 print("Invalid choice. Try again.")
+                choosing = False
 
 
 def clockAction():

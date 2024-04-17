@@ -45,8 +45,8 @@ mansion_rooms = {
         "options": ["south"]
     },
     "gallery": {
-        "description": "On the wall are your grandfather’s paintings beside some"\
-        " family photos.",
+        "description": "On the wall are your grandfather’s favourite paintings"\
+        " and some family photos.",
         "options": ["north"]
     },
     "dining room": {
