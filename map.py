@@ -1,9 +1,9 @@
 ######################################################################
-# Title: RPG_Mansion Map
+# Title: RPG_Mansion Explore
 # Class: CS 30
-# Assignment: External Files: RPG - Try/Except
+# Assignment: RPG - Inventory
 # Coder: Suri Ho
-# Version: 2.0
+# Version: 3.0
 ######################################################################
 ''' This program will write a map to an external file, read the file
 and then print out the map.
@@ -15,7 +15,7 @@ from tabulate import tabulate
 # Mansion map array
 mansion_map = [
     ["living room", "office", "bedroom"],
-    ["main hall", "hallway", "hallway"],
+    ["main hall", "hallway", "hallway1"],
     ["gallery", "dining room", "kitchen"]
 ]
 
@@ -37,6 +37,10 @@ mansion_rooms = {
     "hallway": {
         "description": "There are old paintings hanging on the walls",
         "options": ["north", "east", "south", "west"]
+    },
+    "hallway1": {
+        "description": "The light here has broken.",
+        "options": ["north", "south", "west"]
     },
     "living room": {
         "description": "Across the room, a large stone fireplace stands between"\

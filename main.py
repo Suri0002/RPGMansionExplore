@@ -1,11 +1,12 @@
 ######################################################################
-# Title: RPG_Mansion Map
+# Title: RPG_Mansion Explore
 # Class: CS 30
-# Assignment: Data Structures: RPG - Map
+# Assignment: RPG - Inventory
 # Coder: Suri Ho
-# Version: 2.0
+# Version: 3.0
 ######################################################################
-''' The program allow player to view map and go around the mansion.
+''' The program allow player to go around the mansion and choose any.
+action they want to. The goal is to find the hidden treasure.
 Player can choose to quit the game at any point.
 '''
 ######################################################################
@@ -75,7 +76,7 @@ def player_location():
         if way == "quit":
             sys.exit("Thank you for playing!")
         else:
-            # Go to direction() function to update player location
+            # Go to movement() function to update player location
             movement()
             break
             
