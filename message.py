@@ -19,7 +19,6 @@ def instructions():
     print("You heard that he hide some treasures here, so with a given"\
           " hint, you attempt to find them.")
     print("You can type 'quit' to exit the game at any point.\n")
-    print("Hints will be saved in inventory. Here's your hint."\
-          " Good luck!")
+    print("Here's the hint you have. Good luck!")
     print(inventory.hints["hint1"]["description"])
     inventory.inventory.append("hint1")

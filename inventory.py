@@ -90,7 +90,8 @@ def viewInventory():
 
 
 def useInventory():
-    ''' The function will call other functions depend on what
+    ''' The function will trigger when player want to access items
+    in inventory. It call other functions depend on what
     item player chooses to access. Player can choose quit to stop.
     '''
     global item_choice
@@ -101,7 +102,7 @@ def useInventory():
             print("Please choose an item in inventory.")
         if item_choice == "quit":
             sys.exit("Thank you for playing!")
-        if item_choice == hints.keys():
+        if item_choice == "hint1" or item_choice == "hint2":
             hintAction()
             choosing = False
         elif item_choice == "cup":
@@ -120,6 +121,7 @@ def inspect_Room():
     location_ = map.mansion_map[character.yloc][character.xloc]
     for object in items:
         object_loc = items[object]["location"]
+        # Print item's description if it's at player's current location
         if object_loc == location_:
             print(items[object]["description"])
             object_found = True
@@ -138,7 +140,8 @@ def inspect_Room():
 
 def hintAction():
     ''' The function let user to interact with hints in their inventory.
-    Player can choose quit to stop.'''
+    Player can choose quit to stop.
+    '''
     choosing = True
     while choosing:
         for action in hints[item_choice]["action"]:
@@ -160,6 +163,7 @@ def cupChoice():
     '''
     choosing = True
     while choosing:
+        # Print options to add the cup into inventory
         print("*keep")
         print("*done")
         cup_choice = input("Choose an action: ").lower()
@@ -191,10 +195,13 @@ def cupAction():
             choosing = False
         elif cup_action == "fill":
             print("You've filled the cup with water")
+            # Change one status to filled
             items["cup"]["status1"] = "filled"
         elif cup_action == "place":
+            # Cup can only be placed if player is in the office
             if location_ == "office":
                 print("Cup is place in front of the arrow, next to the bird.")
+                # Change one status to placed
                 items["cup"]["status2"] = "placed"
             else:
                 print("You can't place it here!")
@@ -205,6 +212,8 @@ def birdAction():
     fill and place the cup in the office. Before that, player can't do any
     thing with the bird. 
     '''
+    # If both cup's status changed, player will be inform that hint
+    # is in the book
     if items["cup"]["status1"] == "filled":
         if items["cup"]["status2"] == "placed":
             print("The bird is drinking water. You've taken care of it.")
@@ -227,10 +236,10 @@ def bookAction():
         while choosing:
             for action in items["book"]["action"]:
                 print(f"*{action}")
-            print("*done")
             book_choice = input("Choose an action: ").lower()
             if book_choice not in items["book"]["action"]:
                 print("You can't do that with the book.")
+            # Print the second hint when player choose to open the book
             if book_choice == "open":
                 print("You've found the another hint: ")
                 print(hints["hint2"]["description"])
@@ -249,9 +258,11 @@ def clockAction():
     have found the second hint. Player need to answer correctly to win. Player
     can choose quit to stop.
     '''
+    # Instruction to interact with the clock will be printed after player
+    # has found the second hint
     if hints["hint2"]["status"] == "active":
-        print("Looks like you have to rotate its hands in the correct order."\
-              " Choose answer and type the numbers you think are right in.")
+        print("You realized that you have to rotate its hands four times in"\
+              " the correct order.")
         choosing = True
         while choosing:
             for action in items["clock"]["action"]:
@@ -260,12 +271,11 @@ def clockAction():
             if clock_choice not in items["clock"]["action"]:
                 print("You can't do that with the clock.")
             if clock_choice == "answer":
-                answer = input("Please type your answer: ").lower()
+                answer = input("Enter the hours you want to rotate to: ").lower()
                 if answer == "0, 9, 0, 3":
                     print("The clock is the key to open the safe box hidden"\
                           " inside the fireplace.")
-                    print("Congrats you found the property and successfully"\
-                          " inherited them.")
+                    print("Congrats you found the treasures.")
                     sys.exit("Thank you for playing!")
                 else:
                     print("That's not the answer.")
