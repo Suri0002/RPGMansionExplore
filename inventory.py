@@ -162,21 +162,24 @@ def cupChoice():
     or not. Player can choose quit to stop.
     '''
     choosing = True
-    while choosing:
-        # Print options to add the cup into inventory
-        print("*keep")
-        print("*done")
-        cup_choice = input("Choose an action: ").lower()
-        if cup_choice == "keep":
-            inventory.append("cup")
-            print("Cup is now in your inventory.")
-            choosing = False
-        elif cup_choice == "quit":
-            sys.exit("Thank you for playing!")
-        elif cup_choice == "done":
-            choosing = False
-        else:
-            print("Invalid choice. Try again.")
+    if "cup" not in inventory:
+        while choosing:
+            # Print options to add the cup into inventory
+            print("*keep")
+            print("*done")
+            cup_choice = input("Choose an action: ").lower()
+            if cup_choice == "keep":
+                inventory.append("cup")
+                print("Cup is now in your inventory.")
+                choosing = False
+            elif cup_choice == "quit":
+                sys.exit("Thank you for playing!")
+            elif cup_choice == "done":
+                choosing = False
+            else:
+                print("Invalid choice. Try again.")
+    else:
+        print("The cup is already in the inventory.")
 
 
 def cupAction():
